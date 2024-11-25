@@ -1,0 +1,22 @@
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: expense-main-route
+#          uri: ${EXPENSE_ROUTE_URI:http://localhost:8089} #reading EXPENSE_ROUTE_URI environment variable, if not found, then set to localhost8080
+#          predicates:
+#            - Path=/api/**
+#            - Method=POST,GET,PUT,DELETE
+#          filters:
+#            - StripPrefix=1  # This will remove the first path segment (/api)
+#            - PrefixPath=/api/v1
+#            - AddResponseHeader=X-Powered-By,Danson Gateway Service
+server:
+  port: 9000
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    reactor.netty: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.http: DEBUG
+    org.springframework.boot.web: DEBUG
