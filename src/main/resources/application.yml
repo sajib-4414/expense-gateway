@@ -36,19 +36,25 @@ management:
     circuitbreakers:
       enabled: true
 
+#its fully working global configuration
+#resilience4j.circuitbreaker:
+#  configs:
+#    default:
+#      registerHealthIndicator: true
+#      slidingWindowSize: 6
+#      waitDurationInOpenState: 60000
 
+#its fully working
 resilience4j.circuitbreaker:
-  configs:
-    default:
+  instances:
+    backendA:
       registerHealthIndicator: true
       slidingWindowSize: 6
-      waitDurationInOpenState: 60000
-#resilience4j.circuitbreaker:
-#  instances:
-#    expenseServiceCircuitBreaker:
-#      slidingWindowSize: 6
-#      failureRateThreshold: 50
-#      waitDurationInOpenState: 60000
-#      permittedNumberOfCallsInHalfOpenState: 2
-#      minimumNumberOfCalls: 5
-#      automaticTransitionFromOpenToHalfOpenEnabled: true
+      waitDurationInOpenState: 60000 #just for testing, usually it should be 10-15s. It means if circuit breaker state is
+      #changed to open, it will not go to half open or close before 60s.
+      minimumNumberOfCalls: 5 #5-10 ok for small to medium load applications. It means dont do any calculation of failure rate
+      #or trigger to open, if at least 5 calls are not made to this circuit breaker
+      automaticTransitionFromOpenToHalfOpenEnabled: true #means automatically go to half open from Open, after the waiting period.
+      permittedNumberOfCallsInHalfOpenState: 4 #this is the watching time. Failure happened-> circuit breaker open->waited for the
+      #wait duration -> move to half open state(its watch state)-> watch if 4 calls succeeded-> if succeeded, circuit breaker closes
+      # But if before succeeding 4 calls, another call fail, then circuit breaker moves to Open state again.

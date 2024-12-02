@@ -34,7 +34,8 @@ public class SpringCloudGatewayApplication {
 						.filters(f -> f
 								.rewritePath("/api/(?<segment>.*)", "/api/v1/${segment}")  // Rewrite the path cleanly
 								.addResponseHeader("X-Powered-By", "Danson Gateway Service")
-								.circuitBreaker(c -> c
+								.circuitBreaker(c ->
+										c.setName("backendA")
 										.setFallbackUri("forward:/fallback")
 
 								)
