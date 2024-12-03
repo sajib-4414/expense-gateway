@@ -45,6 +45,7 @@ Because of the reactive nature of the gateway, we had to use the reactive config
 
 ### Resilience4j Configuration
 For Resilience4j, we had to use the reactive version of the plugin. Although the configuration in the YAML file looks almost the same, it is tailored for reactive programming.
+see the pom.xml for details
 
 
 ### Actuator
