@@ -42,6 +42,8 @@ public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
 
 ### Spring Security Configuration
 Because of the reactive nature of the gateway, we had to use the reactive configuration style for Spring Security. The Spring Security plugin remains the same, but the configuration is now reactive.
+For more: https://www.baeldung.com/spring-security-5-reactive
+
 
 ### Resilience4j Configuration
 For Resilience4j, we had to use the reactive version of the plugin. Although the configuration in the YAML file looks almost the same, it is tailored for reactive programming.
