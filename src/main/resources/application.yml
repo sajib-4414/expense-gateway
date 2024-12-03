@@ -35,6 +35,10 @@ management:
   health:
     circuitbreakers:
       enabled: true
+  server:
+    port: 9000
+  security:
+    enabled: false
 
 #its fully working global configuration
 #resilience4j.circuitbreaker:
