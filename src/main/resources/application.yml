@@ -35,8 +35,8 @@ management:
   health:
     circuitbreakers:
       enabled: true
-  server:
-    port: 9000
+#  server:
+#    port: 9000
   security:
     enabled: false
 

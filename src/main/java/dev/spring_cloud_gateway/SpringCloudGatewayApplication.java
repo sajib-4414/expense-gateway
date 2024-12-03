@@ -32,7 +32,9 @@ public class SpringCloudGatewayApplication {
 						r -> r
 						.path("/api/**")  // Match any path under /api
 						.filters(f -> f
+								//this is a pre filter
 								.rewritePath("/api/(?<segment>.*)", "/api/v1/${segment}")  // Rewrite the path cleanly
+								//this is a post filter, depending on what you are doing, is a pre or post filter
 								.addResponseHeader("X-Powered-By", "Danson Gateway Service")
 								.circuitBreaker(c ->
 										c.setName("backendA")
@@ -62,41 +64,8 @@ public class SpringCloudGatewayApplication {
 				.build();
 	}
 
-//	@Bean
-//	public Customizer<ReactiveResilience4JCircuitBreakerFactory> defaultCustomizer() {
-////		return factory -> factory.configureDefault(id -> new Resilience4JConfigBuilder(id)
-////				.circuitBreakerConfig(CircuitBreakerConfig.ofDefaults())
-////				.timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(4)).build()).build());
-//
-//		return factory -> factory.configureDefault(id -> new Resilience4JConfigBuilder(id)
-//				.circuitBreakerConfig(CircuitBreakerConfig.custom()
-//						.slidingWindowSize(10)
-//						.failureRateThreshold(50)
-//						.waitDurationInOpenState(Duration.ofMillis(10000))
-//						.permittedNumberOfCallsInHalfOpenState(3)
-//						.build())
-//				.timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(4)).build())
-//				.build());
-//	}
 
-//		@Bean
-//	public Customizer<SpringCloudCircuitBreakerResilience4JFilterFactory> defaultCustomizer() {
-////		return factory -> factory.configureDefault(id -> new Resilience4JConfigBuilder(id)
-////				.circuitBreakerConfig(CircuitBreakerConfig.ofDefaults())
-////				.timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(4)).build()).build());
-//
-//		return factory ->
-//				factory.new()
-//
-//				factory.configureDefault(id -> new Resilience4JConfigBuilder(id)
-//				.circuitBreakerConfig(CircuitBreakerConfig.custom()
-//						.slidingWindowSize(10)
-//						.failureRateThreshold(50)
-//						.waitDurationInOpenState(Duration.ofMillis(10000))
-//						.permittedNumberOfCallsInHalfOpenState(3)
-//						.build())
-//				.timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(4)).build())
-//				.build());
-//	}
+
+
 
 }
